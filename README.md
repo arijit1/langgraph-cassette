@@ -31,6 +31,28 @@ Calling real LLMs for every test or iteration is **slow** and **expensive**.
 
 npm install langgraph-cassette
 
+## Usage in code
+
+```
+import CassetteLLM from "langgraph-cassette/core/index.js";
+import { createTokenLogger } from "langgraph-cassette/utils/tokenLogger.js";
+
+const logger = createTokenLogger();
+const llm = new CassetteLLM({
+  mode: process.env.CASSETTE_MODE || "auto",
+  cassetteDir: ".cassettes",
+  modelOptions: { model: "gpt-4o-mini", temperature: 0 },
+  logger,
+  verbose: true,
+});
+
+const messages = [{ role: "user", content: "Explain LangGraph Cassette." }];
+const ai = await llm.invoke(messages);
+
+console.log(ai.content);
+console.log("Session summary:", logger.summary());
+```
+
 ### Example
 ## Record Once
 
