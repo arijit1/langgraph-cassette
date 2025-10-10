@@ -13,8 +13,8 @@ const logger = createTokenLogger({
 
 const dev = new CassetteLLM({
   // Try: DEVKIT_MODE=auto DEVKIT_DIR=.cassettes node examples/langchain.mjs
-  mode: process.env.DEVKIT_MODE || "auto",
-  cassetteDir: process.env.DEVKIT_DIR || ".cassettes",
+  mode: process.env.CASSETTE_MODE || "auto",
+  cassetteDir: process.env.CASSETTE_DIR || ".cassettes",
   modelOptions: { model: "gpt-4o-mini", temperature: 0 },
   logger
 });
