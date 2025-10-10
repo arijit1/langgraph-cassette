@@ -44,8 +44,6 @@ CASSETTE_MODE=replay CASSETTE_DIR=.cassettes node examples/langgraph.mjs
 
 ## TERMINAL COMMANDS
 
-# choose behavior globally
-
 CASSETTE_MODE=record CASSETTE_DIR=.cassettes node examples/langchain.mjs
 # or
 CASSETTE_MODE=replay CASSETTE_DIR=.cassettes node examples/langchain.mjs
