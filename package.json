@@ -1,0 +1,38 @@
+{
+  "name": "langgraph-cassette",
+  "version": "0.1.0",
+  "description": "Debug LangGraph/LangChain agents offline with cassette record/replay + token & cost logging.",
+  "type": "module",
+  "main": "src/core/DevLLM.js",
+  "exports": {
+  ".": "./src/core/index.js",
+  "./core": "./src/core/index.js",
+  "./core/DevLLM": "./src/core/index.js",
+  "./core/errors": "./src/core/errors.js"
+  },
+  "bin": { "cassette": "src/cli/cassette.js" },
+  "scripts": {
+    "examples:langchain": "node examples/langchain.mjs",
+    "examples:langgraph": "node examples/langgraph.mjs"
+  },
+  "keywords": [
+    "LangGraph",
+    "LangChain",
+    "LLM",
+    "record",
+    "replay",
+    "mock",
+    "offline",
+    "observability",
+    "CLI"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@langchain/core": "^0.3.0",
+    "@langchain/openai": "^0.3.0",
+    "dotenv": "^17.2.3"
+  },
+  "engines": {
+    "node": ">=18.17"
+  }
+}
