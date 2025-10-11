@@ -5,12 +5,14 @@
   "type": "module",
   "main": "src/core/DevLLM.js",
   "exports": {
-  ".": "./src/core/index.js",
-  "./core": "./src/core/index.js",
-  "./core/DevLLM": "./src/core/index.js",
-  "./core/errors": "./src/core/errors.js"
+    ".": "./src/core/index.js",
+    "./core": "./src/core/index.js",
+    "./core/DevLLM": "./src/core/index.js",
+    "./core/errors": "./src/core/errors.js"
   },
-  "bin": { "cassette": "src/cli/cassette.js" },
+  "bin": {
+    "cassette": "src/cli/cassette.js"
+  },
   "scripts": {
     "examples:langchain": "node examples/langchain.mjs",
     "examples:langgraph": "node examples/langgraph.mjs"
@@ -26,7 +28,7 @@
     "observability",
     "CLI"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "@langchain/core": "^0.3.0",
     "@langchain/openai": "^0.3.0",
