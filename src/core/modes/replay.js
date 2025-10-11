@@ -2,6 +2,7 @@
 // Replay mode: return cassette; on miss, handle via policy (error|live|mock|callback).
 import { loadCassette, shardPath } from "../../utils/cassette.js";
 import { CassetteReplayMissError } from "../errors.js";
+import { normalizeReplayResponse } from "../../utils/replayNormalize.js";
 
 export async function runReplay(ctx, { messages, callOptions, key, modelId }) {
   const cassettePath = shardPath(ctx.cassetteDir, key);
@@ -10,6 +11,9 @@ export async function runReplay(ctx, { messages, callOptions, key, modelId }) {
   const cassette = await loadCassette(ctx.cassetteDir, key);
   if (cassette) {
     if (ctx.verbose) console.log(`[Cassette] replay HIT`);
+
+    const aiNormalized = normalizeReplayResponse(cassette.response);
+
     ctx.logger.onCall({
       mode: "replay",
       key,
@@ -17,7 +21,7 @@ export async function runReplay(ctx, { messages, callOptions, key, modelId }) {
       model: cassette.llm?.model || modelId,
       at: Date.now(),
     });
-    return { aiMessage: cassette.response.aiMessage, hit: true };
+    return { aiMessage: aiNormalized, hit: true };
   }
 
   // 2) miss handling
