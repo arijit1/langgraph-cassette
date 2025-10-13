@@ -26,6 +26,11 @@
       "import": "./src/mocks/MockLLM.js"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arijit1/langgraph-cassette"
+  },
+  "author": "Arijit Sengupta",
   "bin": {
     "cassette": "src/cli/cassette.js"
   },
