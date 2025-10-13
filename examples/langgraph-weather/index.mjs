@@ -1,18 +1,12 @@
-// examples/weather-agent.mjs
 // Build a tiny weather "agent" using CassetteLLM + simple routing/tooling.
-// Drop this next to your existing langgraph example.
 
 import { config } from "dotenv";
-config();
-
 import CassetteLLM from "langgraph-cassette";
 
-// If you already have these utils, keep the imports below.
-// Otherwise replace with your own no-ops or inline versions.
-console.log("here")
 import { createTokenLogger } from "langgraph-cassette/utils/tokenLogger.js";
 import { extractAssistantText } from "langgraph-cassette/utils/extractContent.js";
 
+config();
 
 // ---------- LLM setup ----------
 const logger = createTokenLogger();
