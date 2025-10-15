@@ -1,9 +1,9 @@
 {
   "name": "langgraph-cassette",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Debug LangGraph/LangChain agents offline with cassette record/replay + token & cost logging.",
   "type": "module",
-  "main": "src/core/DevLLM.js",
+  "main": "src/core/CassetteLLM.js",
   "exports": {
     ".": {
       "types": "./types/index.d.ts",
