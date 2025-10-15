@@ -1,0 +1,15 @@
+{
+  "name": "langgraph-weather",
+  "version": "1.0.0",
+  "description": "example using langgraph-cassette",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "langgraph-cassette": "^1.0.1"
+  }
+}
