@@ -1,4 +1,3 @@
-// examples/travel_agent_real_api.mjs
 // LangGraph Cassette demo (real APIs): flight + weather + cost synthesis.
 // - Flights: TravelPayouts (freemium; requires TRAVELPAYOUTS_KEY)
 // - Weather: Open-Meteo geocoding + forecast (no API key needed)
