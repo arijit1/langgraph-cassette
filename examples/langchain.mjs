@@ -24,8 +24,8 @@ const messages = [
 const res = await llm.invoke(messages);
 
 // ✅ Always shows something meaningful across record/replay/live/auto
-const text = JSON.parse(extractAssistantText(res));
+const text = extractAssistantText(res);
 const hasTools = (res.tool_calls || []).length > 0;
-console.log("ASSISTANT:", text.kwargs.content);
+console.log("ASSISTANT:", text);
 
 console.log("SESSION:", logger.summary());
