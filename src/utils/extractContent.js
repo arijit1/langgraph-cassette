@@ -1,47 +1,69 @@
 // src/utils/extractContent.js
-// Robustly extract assistant-visible text from a message or normalized replay.
+function looksLikeLCJSON(s) {
+  return typeof s === "string" && s.startsWith('{"lc":1') && s.includes('"kwargs":');
+}
+
+function partsToText(parts) {
+  return parts
+    .map((p) => {
+      if (!p) return "";
+      if (typeof p === "string") return p;
+      if (typeof p.text === "string") return p.text;
+      if (p.text && typeof p.text.value === "string") return p.text.value;
+      if (typeof p.content === "string") return p.content;
+      if (typeof p.value === "string") return p.value;
+      return "";
+    })
+    .filter(Boolean)
+    .join(" ")
+    .trim();
+}
 
 export function extractAssistantText(msg) {
   if (!msg) return "";
 
-  // If a whole cassette response slipped in
-  if (msg.aiMessage) return extractAssistantText(msg.aiMessage);
+  // 1) direct string content
+  if (typeof msg.content === "string") {
+    // Could be a serialized LC JSON string
+    if (looksLikeLCJSON(msg.content)) {
+      try {
+        const j = JSON.parse(msg.content);
+        return j?.kwargs?.content ?? msg.content;
+      } catch {
+        return msg.content;
+      }
+    }
+    return msg.content;
+  }
 
-  // Tool-call-only replies often have empty content
-  const tcs = msg.tool_calls || msg.toolCalls || [];
-  if ((tcs?.length || 0) > 0 && !msg.content) return "";
-
-  if (typeof msg === "string") return msg;
-  if (typeof msg.content === "string") return msg.content;
-
-  // LangChain BaseMessage
-  if (msg.lc_kwargs && typeof msg.lc_kwargs.content === "string") return msg.lc_kwargs.content;
-
-  // Array of parts with all common shapes
+  // 2) array content (parts)
   if (Array.isArray(msg.content)) {
-    return msg.content
-      .map((part) => {
-        if (!part) return "";
-        if (typeof part === "string") return part;
-        if (typeof part.text === "string") return part.text;
-        if (part.text && typeof part.text.value === "string") return part.text.value;
-        if (typeof part.content === "string") return part.content;
-        if (typeof part.value === "string") return part.value;
-        if (part.type === "text") {
-          if (typeof part.text === "string") return part.text;
-          if (part.text && typeof part.text.value === "string") return part.text.value;
-        }
-        return "";
-      })
-      .filter(Boolean)
-      .join(" ")
-      .trim();
+    return partsToText(msg.content);
   }
 
-  try {
-    const s = JSON.stringify(msg.content ?? msg);
-    return s === "{}" ? "" : s;
-  } catch {
-    return "";
+  // 3) LangChain-style kwargs
+  if (msg?.kwargs?.content) {
+    if (typeof msg.kwargs.content === "string") return msg.kwargs.content;
+    if (Array.isArray(msg.kwargs.content)) return partsToText(msg.kwargs.content);
   }
+
+  // 4) whole message comes in as a serialized LC JSON string
+  if (typeof msg === "string" && looksLikeLCJSON(msg)) {
+    try {
+      const j = JSON.parse(msg);
+      return j?.kwargs?.content ?? "";
+    } catch {
+      return "";
+    }
+  }
+
+  // 5) fallback
+  try {
+    // some SDKs stash content in additional_kwargs.message or similar
+    if (msg?.additional_kwargs?.message && typeof msg.additional_kwargs.message === "string") {
+      return msg.additional_kwargs.message;
+    }
+  } catch {}
+
+  return "";
 }
