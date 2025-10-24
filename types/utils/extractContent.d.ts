@@ -1,0 +1,1 @@
+export function extractAssistantText(msg: any): string;

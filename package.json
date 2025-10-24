@@ -1,0 +1,67 @@
+{
+  "name": "langgraph-cassette",
+  "version": "1.0.4",
+  "description": "Debug LangGraph/LangChain agents offline with cassette record/replay + token & cost logging.",
+  "type": "module",
+  "main": "src/core/CassetteLLM.js",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./src/core/index.js"
+    },
+    "./core/index.js": {
+      "types": "./types/core/index.d.ts",
+      "import": "./src/core/index.js"
+    },
+    "./utils/tokenLogger.js": {
+      "types": "./types/utils/tokenLogger.d.ts",
+      "import": "./src/utils/tokenLogger.js"
+    },
+    "./utils/extractContent.js": {
+      "types": "./types/utils/extractContent.d.ts",
+      "import": "./src/utils/extractContent.js"
+    },
+    "./mocks/MockLLM.js": {
+      "types": "./types/mocks/MockLLM.d.ts",
+      "import": "./src/mocks/MockLLM.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arijit1/langgraph-cassette"
+  },
+  "author": "Arijit Sengupta",
+  "bin": {
+    "cassette": "src/cli/cassette.js"
+  },
+  "scripts": {
+    "examples:langchain": "node examples/langchain.mjs",
+    "examples:langgraph": "node examples/langgraph.mjs"
+  },
+  "keywords": [
+    "LangGraph",
+    "LangChain",
+    "LLM",
+    "record",
+    "replay",
+    "mock",
+    "offline",
+    "observability",
+    "CLI"
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@langchain/core": "^0.3.0",
+    "@langchain/openai": "^0.3.0",
+    "dotenv": "^17.2.3"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "files": [
+    "src/",
+    "types/",
+    "README.md",
+    "LICENSE"
+  ]
+}
