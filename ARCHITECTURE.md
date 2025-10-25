@@ -53,6 +53,7 @@ examples/
 
 ## 4. Architecture Diagram
 
+<img width="1456" height="959" alt="image" src="https://github.com/user-attachments/assets/e7b1e458-d208-4c78-bd19-3de9d0b6ccfa" />
 
 ---
 
@@ -148,9 +149,11 @@ Path: `.cassettes/tools/<key[0..1]>/<key>.json`
 ## 7. Data Flow Diagrams
 
 ### 7.1 LLM Flow
+<img width="1249" height="828" alt="image" src="https://github.com/user-attachments/assets/bcae8cf9-e678-4731-b803-6a8e06201f30" />
 
 
 ### 7.2 Tool Flow
+<img width="1125" height="829" alt="image" src="https://github.com/user-attachments/assets/d1961f7d-0736-45e6-b435-43cf8245e27f" />
 
 ---
 
