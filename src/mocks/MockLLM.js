@@ -1,5 +1,4 @@
 // src/mocks/MockLLM.js
-// Heuristic mock; no "devkit" wording anywhere.
 
 export class MockLLM {
   constructor(opts = {}) {
